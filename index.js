@@ -35,18 +35,76 @@ app.use((req, res, next) => {
 })
 
 // REQUIRE MODELS AND VIEWS FUNCTIONS
-const page = require('./views/page')
+const page = require(`./views/page`);
+const helper = require(`./views/helper`);
 
-//ROUTES
+const User = require(`./models/Users`);
 
+//protect route to ensure logged in user is accessing
+function protectRoute(req, res, next) {
+  let isLoggedIn = req.session.user ? true : false;
+  if (isLoggedIn) {
+    next();
+  }
+  else {
+    res.redirect('/');
+  }
+}
 
+//=======ROUTES===============
 //ROOT
 app.get('/', (req, res) =>
   res.send(
     page(`<h3>sup</h3>`)
   ));
 
+//LOGIN
+app.get('/login', (req, res) =>
+  res.send(page(`
+  ${helper.registrationForm()}
+  ${helper.loginForm()}
+  `))
+);
 
+//LOGIN ===== POST
+app.get(`/loggedin`, (req, res) => {
+  res.send(page(`<p>you are logged in</p>`))
+})
+
+app.post(`/login`, (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  User.getByEmail(email)
+    .catch(err => {
+      console.log(err);
+    })
+    .then(user => {
+      const didMatch = user.checkPassword(password);
+
+      if (didMatch) {
+        req.session.user = user;
+        console.log(req.session.user);
+        res.redirect(`/loggedin`);
+      }
+      else {
+        res.redirect(`/login`);
+      }
+    })
+});
+
+app.get(`/registered`, (req, res) => {
+  res.send(page(`<p>you have registered</p>`))
+})
+
+// REGISTER ===== POST
+app.post(`/register`, (req, res) => {
+  User.addUser(req.body.displayName, req.body.email, req.body.phoneNumber, req.body.password)
+    .then(user => {
+      req.session.user = user;
+      console.log(req.session.user);
+      res.redirect(`/registered`)
+    })
+});
 
 // LISTEN ON PORT
 app.listen(3000, () => {

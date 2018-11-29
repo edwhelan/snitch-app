@@ -24,6 +24,27 @@ class User {
       ($1, $2, $3, $4)
       returning id
       `, [displayname, emailaddress, phonenumber, hash])
+      .then(data => {
+        const u = new User(data.id, displayname, emailaddress, phonenumber);
+        return u;
+      })
+  }
+
+  static getByEmail(email) {
+    return db.one(`
+    select *
+    from users
+    where emailaddress
+    ilike '$1:raw'
+    `, [email])
+      .then(result => {
+        const u = new User(result.id, result.displayname, result.emailaddress, result.phonenumber, result.password);
+        return u;
+      });
+  }
+
+  checkPassword(password) {
+    return bcrypt.compareSync(password, this.passHash);
   }
 
   //RETREIVE 
