@@ -1,14 +1,14 @@
 insert into users
   (displayname, emailaddress, phonenumber, password)
     values
-  ('bob', 'bob@bobmail.com', '4046686836', 'password'),
-  ('tom', 'tom@bobmail.com', '4046686837', 'password'),
-  ('ted', 'ted@bobmail.com', '4046686838', 'password'),
-  ('fred', 'fred@bobmail.com', '4046686839', 'password'),
-  ('kim', 'kim@bobmail.com', '4046686833', 'password'),
-  ('whiskey', 'whiskey@bobmail.com', '4046686822', 'password'),
-  ('Scotty', 'scotty@bobmail.com', '4046686855', 'password'),
-  ('Jacky', 'jacky@bobmail.com', '4046686877', 'password');
+  ('bob', 'bob@bobmail.com', '4046686836', '$2b$10$MRBEiNjF1MiftaqbqwVJmuMg.JZXKk.RBJbL3N5cdkxn4qH/jb9eq'),
+  ('tom', 'tom@bobmail.com', '4046686837', '$2b$10$MRBEiNjF1MiftaqbqwVJmuMg.JZXKk.RBJbL3N5cdkxn4qH/jb9eq'),
+  ('ted', 'ted@bobmail.com', '4046686838', '$2b$10$MRBEiNjF1MiftaqbqwVJmuMg.JZXKk.RBJbL3N5cdkxn4qH/jb9eq'),
+  ('fred', 'fred@bobmail.com', '4046686839', '$2b$10$MRBEiNjF1MiftaqbqwVJmuMg.JZXKk.RBJbL3N5cdkxn4qH/jb9eq'),
+  ('kim', 'kim@bobmail.com', '4046686833', '$2b$10$MRBEiNjF1MiftaqbqwVJmuMg.JZXKk.RBJbL3N5cdkxn4qH/jb9eq'),
+  ('whiskey', 'whiskey@bobmail.com', '4046686822', '$2b$10$MRBEiNjF1MiftaqbqwVJmuMg.JZXKk.RBJbL3N5cdkxn4qH/jb9eq'),
+  ('Scotty', 'scotty@bobmail.com', '4046686855', '$2b$10$MRBEiNjF1MiftaqbqwVJmuMg.JZXKk.RBJbL3N5cdkxn4qH/jb9eq'),
+  ('Jacky', 'jacky@bobmail.com', '4046686877', '$2b$10$MRBEiNjF1MiftaqbqwVJmuMg.JZXKk.RBJbL3N5cdkxn4qH/jb9eq');
 
 insert into pictures
   (votevalue, image, user_id)

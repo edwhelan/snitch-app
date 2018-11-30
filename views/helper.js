@@ -1,3 +1,21 @@
+//HEADER AREA 
+function header(isLoggedIn = false) {
+  return `
+    <header>
+
+    <h1>1-800-SNITCH</h1>
+    ${
+    isLoggedIn ? logoutButton() : none()
+    }
+
+    </header>
+  `
+}
+
+function none() {
+  return ``;
+}
+
 //REGISTER VIEW
 function registrationForm() {
   return `
@@ -30,7 +48,7 @@ function registrationForm() {
 //LOGIN VIEW
 function loginForm() {
   return `
-  <div class='login-form'
+  <div class='login-form'>
   <form action="/login" method="POST">
       <label>
           Email address:<br>
@@ -58,6 +76,7 @@ function logoutButton() {
 
 
 module.exports = {
+  header,
   registrationForm,
   loginForm,
   logoutButton,

@@ -55,22 +55,28 @@ function protectRoute(req, res, next) {
 //ROOT
 app.get('/', (req, res) =>
   res.send(
-    page(`<h3>sup</h3>`)
+    page(`
+    ${helper.header(req.session.user)}
+    <h3>sup</h3>`)
   ));
 
 //LOGIN
 app.get('/login', (req, res) =>
-  res.send(page(`
+  res.send(
+    page(`
+  ${helper.header(req.session.user)}
   ${helper.registrationForm()}
   ${helper.loginForm()}
   `))
 );
 
-//LOGIN ===== POST
 app.get(`/loggedin`, (req, res) => {
-  res.send(page(`<p>you are logged in</p>`))
+  res.send(page(`
+  ${helper.header(req.session.user)}  
+  <p>you are logged in</p>`))
 })
 
+//LOGIN ===== POST
 app.post(`/login`, (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -80,20 +86,20 @@ app.post(`/login`, (req, res) => {
     })
     .then(user => {
       const didMatch = user.checkPassword(password);
-
       if (didMatch) {
         req.session.user = user;
-        console.log(req.session.user);
         res.redirect(`/loggedin`);
       }
       else {
-        res.redirect(`/login`);
+        res.redirect(`/`);
       }
     })
 });
 
 app.get(`/registered`, (req, res) => {
-  res.send(page(`<p>you have registered</p>`))
+  res.send(page(`
+  ${helper.header(req.session.user)}  
+  <p>you have registered</p>`))
 })
 
 // REGISTER ===== POST
@@ -105,6 +111,13 @@ app.post(`/register`, (req, res) => {
       res.redirect(`/registered`)
     })
 });
+
+// LOGOUT ======== POST
+app.post(`/logout`, (req, res) => {
+  req.session.destroy();
+  res.redirect('/');
+})
+
 
 // LISTEN ON PORT
 app.listen(3000, () => {
