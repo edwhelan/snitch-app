@@ -27,6 +27,13 @@ app.use(express.static('public')); //all static files will be served from the pu
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+//TWILIO REQUIREMENTS
+const accountSid = process.env.TWILIO_accountSid; // Your Account SID from www.twilio.com/console
+const authToken = process.env.TWILIO_authToken;   // Your Auth Token from www.twilio.com/console
+
+const twilio = require('twilio');
+const client = new twilio(accountSid, authToken);
+
 
 app.use((req, res, next) => {
   let isLoggedIn = req.session.user ? true : false;

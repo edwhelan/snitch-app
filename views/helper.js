@@ -2,12 +2,8 @@
 function header(isLoggedIn = false) {
   return `
     <header>
-
     <h1>1-800-SNITCH</h1>
-    ${
-    isLoggedIn ? logoutButton() : none()
-    }
-
+    ${isLoggedIn ? logoutButton() : none()}
     </header>
   `
 }
