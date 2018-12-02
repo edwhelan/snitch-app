@@ -70,11 +70,11 @@ app.get('/', (req, res) =>
 
 //twilio test
 app.post('/sms', (req, res) => {
-  const responseCountry = req.body.FromCountry;
-  console.log(req.body.MediaUrl0)
+  // console.log(req.body.MediaUrl0)
   const twiml = new MessagingResponse();
-  twiml.message(`Hi! We recieved your Photo! Happy Snitching!`);
+  //take req.body.MediaUrl0 and req.body.From and inject them into Pictures table.
 
+  twiml.message(`Hi! We recieved your Photo! Happy Snitching!`);
   res.writeHead(200, { 'Content-Type': 'text/xml' });
   res.end(twiml.toString());
 });
