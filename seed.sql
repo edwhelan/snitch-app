@@ -11,13 +11,13 @@ insert into users
   ('Jacky', 'jacky@bobmail.com', '4046686877', '$2b$10$MRBEiNjF1MiftaqbqwVJmuMg.JZXKk.RBJbL3N5cdkxn4qH/jb9eq');
 
 insert into pictures
-  (votevalue, image, user_id)
+  (votevalue, image, phonenumber, user_id)
     values
-  (0,'picture goes here', 1),
-  (0,'picture goes here2', 2),
-  (0,'picture goes here3', 3),
-  (0,'picture goes here4', 4),
-  (0,'picture goes here5', 5),
-  (0,'picture goes here6', 6),
-  (0,'picture goes here7', 7),
-  (0,'picture goes here8', 8);
+  (0,'picture goes here', '14046686836', 1),
+  (0,'picture goes here2', '14046686836', 2),
+  (0,'picture goes here3', '14046686836', 3),
+  (0,'picture goes here4', '14046686836', 4),
+  (0,'picture goes here5', '14046686836', 5),
+  (0,'picture goes here6', '14046686836', 6),
+  (0,'picture goes here7', '14046686836', 7),
+  (0,'picture goes here8', '14046686836', 8);

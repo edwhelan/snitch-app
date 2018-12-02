@@ -12,6 +12,6 @@ create table pictures (
   id serial primary key,
   votevalue integer,
   image varchar (500),
-  phonenumber varchar (10),
+  phonenumber varchar (12),
   user_id integer references users (id)
 );  

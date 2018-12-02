@@ -47,6 +47,7 @@ const page = require(`./views/page`);
 const helper = require(`./views/helper`);
 
 const User = require(`./models/Users`);
+const Picture = require(`./models/Pictures`);
 
 //protect route to ensure logged in user is accessing
 function protectRoute(req, res, next) {
@@ -73,7 +74,9 @@ app.post('/sms', (req, res) => {
   // console.log(req.body.MediaUrl0)
   const twiml = new MessagingResponse();
   //take req.body.MediaUrl0 and req.body.From and inject them into Pictures table.
-
+  console.log(req.body);
+  Picture.addPicture(req.body.MediaUrl0, req.body.From, 1)
+    .catch(err => { console.log(err) });
   twiml.message(`Hi! We recieved your Photo! Happy Snitching!`);
   res.writeHead(200, { 'Content-Type': 'text/xml' });
   res.end(twiml.toString());
