@@ -13,11 +13,11 @@ insert into users
 insert into pictures
   (votevalue, image, phonenumber, user_id)
     values
-  (0,'picture goes here', '14046686836', 1),
-  (0,'picture goes here2', '14046686836', 2),
-  (0,'picture goes here3', '14046686836', 3),
-  (0,'picture goes here4', '14046686836', 4),
-  (0,'picture goes here5', '14046686836', 5),
-  (0,'picture goes here6', '14046686836', 6),
-  (0,'picture goes here7', '14046686836', 7),
-  (0,'picture goes here8', '14046686836', 8);
+  (0,'https://api.twilio.com/2010-04-01/Accounts/ACab9c691a6378037d225d48522f484e7d/Messages/MM05571d44849fe48f32e4059fe4cf306a/Media/MEe5a6bb3b49e776ba255620d73835b746', '14046686836', 1),
+  (0,'https://api.twilio.com/2010-04-01/Accounts/ACab9c691a6378037d225d48522f484e7d/Messages/MM05571d44849fe48f32e4059fe4cf306a/Media/MEe5a6bb3b49e776ba255620d73835b746', '14046686836', 2),
+  (0,'https://api.twilio.com/2010-04-01/Accounts/ACab9c691a6378037d225d48522f484e7d/Messages/MM05571d44849fe48f32e4059fe4cf306a/Media/MEe5a6bb3b49e776ba255620d73835b746', '14046686836', 3),
+  (0,'https://api.twilio.com/2010-04-01/Accounts/ACab9c691a6378037d225d48522f484e7d/Messages/MM05571d44849fe48f32e4059fe4cf306a/Media/MEe5a6bb3b49e776ba255620d73835b746', '14046686836', 4),
+  (0,'https://api.twilio.com/2010-04-01/Accounts/ACab9c691a6378037d225d48522f484e7d/Messages/MM05571d44849fe48f32e4059fe4cf306a/Media/MEe5a6bb3b49e776ba255620d73835b746', '14046686836', 5),
+  (0,'https://api.twilio.com/2010-04-01/Accounts/ACab9c691a6378037d225d48522f484e7d/Messages/MM05571d44849fe48f32e4059fe4cf306a/Media/MEe5a6bb3b49e776ba255620d73835b746', '14046686836', 6),
+  (0,'https://api.twilio.com/2010-04-01/Accounts/ACab9c691a6378037d225d48522f484e7d/Messages/MM05571d44849fe48f32e4059fe4cf306a/Media/MEe5a6bb3b49e776ba255620d73835b746', '14046686836', 7),
+  (0,'https://api.twilio.com/2010-04-01/Accounts/ACab9c691a6378037d225d48522f484e7d/Messages/MM05571d44849fe48f32e4059fe4cf306a/Media/MEe5a6bb3b49e776ba255620d73835b746', '14046686836', 8);
