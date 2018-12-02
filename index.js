@@ -30,9 +30,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //TWILIO REQUIREMENTS
 const accountSid = process.env.TWILIO_accountSid; // Your Account SID from www.twilio.com/console
 const authToken = process.env.TWILIO_authToken;   // Your Auth Token from www.twilio.com/console
-
+const http = require('http');
 const twilio = require('twilio');
 const client = new twilio(accountSid, authToken);
+const MessagingResponse = twilio.twiml.MessagingResponse;
 
 
 app.use((req, res, next) => {
@@ -66,6 +67,20 @@ app.get('/', (req, res) =>
     ${helper.header(req.session.user)}
     <h3>sup</h3>`)
   ));
+
+//twilio test
+app.post('/sms', (req, res) => {
+  const responseCountry = req.body.FromCountry;
+  console.log(req.body.MediaUrl0)
+  const twiml = new MessagingResponse();
+  twiml.message(`Hi! We recieved your Photo! Happy Snitching!`);
+
+  res.writeHead(200, { 'Content-Type': 'text/xml' });
+  res.end(twiml.toString());
+});
+
+
+
 
 //LOGIN
 app.get('/login', (req, res) =>
