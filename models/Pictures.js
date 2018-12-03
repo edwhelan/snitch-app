@@ -19,9 +19,20 @@ class Picture {
     `, [0, image, phonenumber, user_id])
       .then(result => {
         const h = new Picture(result.id, 0, image, phonenumber, user_id);
+        console.log(h);
         return h;
       })
   }
+
+  static getAllPictures() {
+    return db.any(`
+    select *
+    from pictures
+  `)
+  }
+
+
+
 }
 
 module.exports = Picture;

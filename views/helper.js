@@ -70,10 +70,28 @@ function logoutButton() {
   `;
 }
 
+function drawPicture(source) {
+  return `
+  <img src='${source}' />
+  `
+}
+
+// SHOW ALL THE PICTURES
+function showPictures(images) {
+  return `
+  <div>
+  <img src='${image.map(img => {
+      return drawPicture(img.image)
+    })}'/>
+  <div>
+  `
+}
+
 
 module.exports = {
   header,
   registrationForm,
   loginForm,
   logoutButton,
+  showPictures,
 }

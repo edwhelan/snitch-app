@@ -62,14 +62,21 @@ function protectRoute(req, res, next) {
 
 //=======ROUTES===============
 //ROOT
-app.get('/', (req, res) =>
-  res.send(
-    page(`
-    ${helper.header(req.session.user)}
-    <h3>sup</h3>`)
-  ));
+app.get('/', (req, res) => {
+  Picture.getAllPictures()
+    .then(results => {
+      console.log(`Here are your results : ${results}`)
+      res.send(
+        page(`
+        ${helper.header(req.session.user)}
+        <h3>sup</h3>
+            `)
+      )
+    })
 
-//twilio test
+});
+
+//twilio Picture adder
 app.post('/sms', (req, res) => {
   // console.log(req.body.MediaUrl0)
   const twiml = new MessagingResponse();
@@ -89,20 +96,20 @@ app.post('/sms', (req, res) => {
 app.get('/login', (req, res) =>
   res.send(
     page(`
-  ${helper.header(req.session.user)}
-  ${helper.registrationForm()}
-  ${helper.loginForm()}
-  `))
+  ${ helper.header(req.session.user)}
+  ${ helper.registrationForm()}
+  ${ helper.loginForm()}
+            `))
 );
 
-app.get(`/loggedin`, (req, res) => {
+app.get(`/ loggedin`, (req, res) => {
   res.send(page(`
-  ${helper.header(req.session.user)}  
-  <p>you are logged in</p>`))
+  ${ helper.header(req.session.user)}
+          < p > you are logged in</p > `))
 })
 
 //LOGIN ===== POST
-app.post(`/login`, (req, res) => {
+app.post(`/ login`, (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   User.getByEmail(email)
@@ -113,32 +120,32 @@ app.post(`/login`, (req, res) => {
       const didMatch = user.checkPassword(password);
       if (didMatch) {
         req.session.user = user;
-        res.redirect(`/loggedin`);
+        res.redirect(`/ loggedin`);
       }
       else {
-        res.redirect(`/`);
+        res.redirect(`/ `);
       }
     })
 });
 
-app.get(`/registered`, (req, res) => {
+app.get(`/ registered`, (req, res) => {
   res.send(page(`
-  ${helper.header(req.session.user)}  
-  <p>you have registered</p>`))
+  ${ helper.header(req.session.user)}
+          < p > you have registered</p > `))
 })
 
 // REGISTER ===== POST
-app.post(`/register`, (req, res) => {
+app.post(`/ register`, (req, res) => {
   User.addUser(req.body.displayName, req.body.email, req.body.phoneNumber, req.body.password)
     .then(user => {
       req.session.user = user;
       console.log(req.session.user);
-      res.redirect(`/registered`)
+      res.redirect(`/ registered`)
     })
 });
 
 // LOGOUT ======== POST
-app.post(`/logout`, (req, res) => {
+app.post(`/ logout`, (req, res) => {
   req.session.destroy();
   res.redirect('/');
 })
