@@ -70,23 +70,46 @@ function logoutButton() {
   `;
 }
 
+var http = require('follow-redirects').http;
+var https = require('follow-redirects').https;
+
+function getAddress(source) {
+  return (
+    new Promise(
+      (resolve, reject) => {
+        https.get(source, (res) => {
+          const { statusCode } = res;
+          const contentType = res.headers['content-type'];
+          console.log(`This is your content type : ${contentType}`)
+          console.log(`This is your statusCode : ${statusCode}`)
+          console.log(res.responseUrl)
+          resolve(drawPicture(res.responseUrl))
+        })
+      }
+    )
+  )
+
+}
+
 function drawPicture(source) {
+  console.log(`this is your routed address : ${source}`);
   return `
   <img src='${source}' />
-  `
+  `;
 }
+
 
 // SHOW ALL THE PICTURES
 function showPictures(images) {
-  return `
-  <div>
-  <img src='${image.map(img => {
-      return drawPicture(img.image)
-    })}'/>
-  <div>
-  `
-}
 
+
+  return Promise.all(images.map(img => {
+    // console.log(`ITS WORKING!${drawPicture(img.image)}`
+    return getAddress(img.image)
+  }))
+
+
+}
 
 module.exports = {
   header,
@@ -94,4 +117,5 @@ module.exports = {
   loginForm,
   logoutButton,
   showPictures,
+  drawPicture,
 }

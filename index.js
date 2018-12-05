@@ -65,18 +65,26 @@ function protectRoute(req, res, next) {
 app.get('/', (req, res) => {
   Picture.getAllPictures()
     .then(results => {
-      console.log(`Here are your results : ${results}`)
-      res.send(
-        page(`
-        ${helper.header(req.session.user)}
-        <h3>sup</h3>
-            `)
-      )
+      console.log(`Yo : ${results.length}`);
+      helper.showPictures(results)
+        .then((allPictures) => {
+          console.log(allPictures)
+          res.send(
+            page(`
+          ${helper.header(req.session.user)}
+          <div>${allPictures.join('')}</div>
+          <h3>sup</h3>
+              `)
+          )
+        })
+
     })
 
 });
 
-//twilio Picture adder
+
+
+//twilio Picture add post
 app.post('/sms', (req, res) => {
   // console.log(req.body.MediaUrl0)
   const twiml = new MessagingResponse();
