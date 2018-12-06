@@ -7,6 +7,7 @@ const db = require('./models/db');
 // Dependencies
 const bodyParser = require('body-parser');
 const express = require('express');
+
 const app = express();
 const session = require('express-session');
 const pgSession = require('connect-pg-simple')(session);
@@ -23,7 +24,7 @@ app.use(session({
   }
 }));
 
-app.use(express.static('public')); //all static files will be served from the public server
+app.use(express.static('public')); // all static files will be served from public folder
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -83,19 +84,40 @@ app.get('/', (req, res) => {
 });
 
 
+var https = require('follow-redirects').https;
 
 //twilio Picture add post
+
+function getAddress(source) {
+  return (
+    new Promise(
+      (resolve, reject) => {
+        https.get(source, (res) => {
+          const { statusCode } = res;
+          const contentType = res.headers['content-type'];
+          resolve(res.responseUrl)
+        })
+      }
+    )
+  )
+}
+
 app.post('/sms', (req, res) => {
   // console.log(req.body.MediaUrl0)
   const twiml = new MessagingResponse();
-  //take req.body.MediaUrl0 and req.body.From and inject them into Pictures table.
-  console.log(req.body);
-  Picture.addPicture(req.body.MediaUrl0, req.body.From, 1)
-    .catch(err => { console.log(err) });
-  twiml.message(`Hi! We recieved your Photo! Happy Snitching!`);
-  res.writeHead(200, { 'Content-Type': 'text/xml' });
-  res.end(twiml.toString());
-});
+  getAddress(req.body.MediaUrl0)
+    .then(results => {
+      console.log(`hopefully this isnt an object ${results}`)
+      Picture.addPicture(results, req.body.From, 1)
+        .catch(err => { console.log(err) });
+      twiml.message(`Hi! We recieved your Photo! Happy Snitching!`);
+      res.writeHead(200, { 'Content-Type': 'text/xml' });
+      res.end(twiml.toString());
+    });
+})
+
+//take req.body.MediaUrl0 and req.body.From and inject them into Pictures table.
+
 
 
 

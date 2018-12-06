@@ -80,9 +80,6 @@ function getAddress(source) {
         https.get(source, (res) => {
           const { statusCode } = res;
           const contentType = res.headers['content-type'];
-          console.log(`This is your content type : ${contentType}`)
-          console.log(`This is your statusCode : ${statusCode}`)
-          console.log(res.responseUrl)
           resolve(drawPicture(res.responseUrl))
         })
       }
@@ -92,9 +89,8 @@ function getAddress(source) {
 }
 
 function drawPicture(source) {
-  console.log(`this is your routed address : ${source}`);
   return `
-  <img src='${source}' />
+  <img class='image-in-row' src='${source}' />
   `;
 }
 
