@@ -72,7 +72,7 @@ app.get('/', (req, res) =>
           res.send(
             page(`
             ${helper.header(req.session.user)}
-            ${allPictures.join('')}
+            <div class='image-gallery'>${allPictures.join('')}</div>
             `)
           )
         })

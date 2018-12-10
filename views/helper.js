@@ -73,7 +73,11 @@ function logoutButton() {
 function drawPicture(data) {
   return new Promise(
     (resolve, reject) => {
-      resolve(`<img class='image-in-row' srcset=${data} />`)
+      resolve(`
+      <div class='image-in-row'>
+      <img srcset=${data} />
+      </div>
+      `)
     }
   )
 }
