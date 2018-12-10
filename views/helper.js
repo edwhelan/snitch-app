@@ -70,12 +70,14 @@ function logoutButton() {
   `;
 }
 
-function drawPicture(data) {
+function drawPicture(data, value, id) {
   return new Promise(
     (resolve, reject) => {
+      console.log(value)
       resolve(`
-      <div class='image-in-row'>
+      <div class='image-in-row' key='${id}'>
       <img srcset=${data} />
+      <i class="fas fa-arrow-up">${value}</i>
       </div>
       `)
     }
@@ -85,7 +87,7 @@ function drawPicture(data) {
 // SHOW ALL THE PICTURES
 function showPictures(images) {
   return Promise.all(images.map(img => {
-    return drawPicture(img.image)
+    return drawPicture(img.image, img.votevalue, img.id)
   }))
 }
 

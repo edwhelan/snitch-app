@@ -79,6 +79,12 @@ app.get('/', (req, res) =>
     })
 )
 
+// app.post('/vote', (req, res) => 
+// Picture.incrementPicture(id)
+// .then(results => {
+
+// })
+// )
 
 
 

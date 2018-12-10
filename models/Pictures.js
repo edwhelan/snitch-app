@@ -30,6 +30,14 @@ class Picture {
   `)
   }
 
+  incrementPicture(id, voteValue) {
+    newVoteValue = voteValue + 1;
+    return db.result(`
+  update pictures
+  set voteValue=$1
+  where id=$2`, [newVoteValue, id]
+    )
+  }
 
 
 }
