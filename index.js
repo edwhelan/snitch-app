@@ -11,6 +11,7 @@ const express = require('express');
 const app = express();
 const session = require('express-session');
 const pgSession = require('connect-pg-simple')(session);
+const https = require('follow-redirects').https;
 
 //Using Dependencies 
 app.use(session({
@@ -63,31 +64,45 @@ function protectRoute(req, res, next) {
 
 //=======ROUTES===============
 //ROOT
-app.get('/', (req, res) => {
+app.get('/', (req, res) =>
   Picture.getAllPictures()
     .then(results => {
-      console.log(`Yo : ${results.length}`);
       helper.showPictures(results)
-        .then((allPictures) => {
-          console.log(allPictures)
+        .then(allPictures => {
           res.send(
             page(`
-          ${helper.header(req.session.user)}
-          <div>${allPictures.join('')}</div>
-          <h3>sup</h3>
-              `)
+            ${helper.header(req.session.user)}
+            ${allPictures.join('')}
+            `)
           )
         })
-
     })
+)
 
-});
 
 
-var https = require('follow-redirects').https;
+
+// Picture.getAllPictures()
+// .then(results => {
+//   console.log(`Yo : ${ results.length }`);
+//   helper.showPictures(results)
+//     .then((allPictures) => {
+//       console.log(allPictures)
+//       res.send(
+//         page(`
+//       ${helper.header(req.session.user)}
+//       <div>${allPictures.join('')}</div>
+//       <h3>sup</h3>
+//           `)
+//       )
+//     })
+
+// })
+
+
+
 
 //twilio Picture add post
-
 function getAddress(source) {
   return (
     new Promise(
@@ -107,7 +122,6 @@ app.post('/sms', (req, res) => {
   const twiml = new MessagingResponse();
   getAddress(req.body.MediaUrl0)
     .then(results => {
-      console.log(`hopefully this isnt an object ${results}`)
       Picture.addPicture(results, req.body.From, 1)
         .catch(err => { console.log(err) });
       twiml.message(`Hi! We recieved your Photo! Happy Snitching!`);

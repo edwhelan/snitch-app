@@ -2,7 +2,7 @@
 function header(isLoggedIn = false) {
   return `
     <header>
-    <h1>1-800-SNITCH</h1>
+    <h1>Naughty or Nice</h1>
     ${isLoggedIn ? logoutButton() : none()}
     </header>
   `
@@ -70,41 +70,19 @@ function logoutButton() {
   `;
 }
 
-var http = require('follow-redirects').http;
-var https = require('follow-redirects').https;
-
-function getAddress(source) {
-  return (
-    new Promise(
-      (resolve, reject) => {
-        https.get(source, (res) => {
-          const { statusCode } = res;
-          const contentType = res.headers['content-type'];
-          resolve(drawPicture(res.responseUrl))
-        })
-      }
-    )
+function drawPicture(data) {
+  return new Promise(
+    (resolve, reject) => {
+      resolve(`<img class='image-in-row' srcset=${data} />`)
+    }
   )
-
 }
-
-function drawPicture(source) {
-  return `
-  <img class='image-in-row' src='${source}' />
-  `;
-}
-
 
 // SHOW ALL THE PICTURES
 function showPictures(images) {
-
-
   return Promise.all(images.map(img => {
-    // console.log(`ITS WORKING!${drawPicture(img.image)}`
-    return getAddress(img.image)
+    return drawPicture(img.image)
   }))
-
-
 }
 
 module.exports = {
