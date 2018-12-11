@@ -9,16 +9,16 @@ class Picture {
       this.phonenumber = phonenumber
   }
 
-  static addPicture(image, phonenumber, user_id) {
+  static addPicture(image, phonenumber) {
     return db.one(`
     insert into Pictures
-      (votevalue, image, phonenumber, user_id)
+      (votevalue, image, phonenumber)
         values
-      ($1, $2, $3, $4)
+      ($1, $2, $3)
       returning id
-    `, [0, image, phonenumber, user_id])
+    `, [0, image, phonenumber])
       .then(result => {
-        const h = new Picture(result.id, 0, image, phonenumber, user_id);
+        const h = new Picture(result.id, 0, image, phonenumber);
         return h;
       })
   }
@@ -30,12 +30,11 @@ class Picture {
   `)
   }
 
-  incrementPicture(id, voteValue) {
+  incrementPicture(voteValue) {
     newVoteValue = voteValue + 1;
     return db.result(`
   update pictures
-  set voteValue=$1
-  where id=$2`, [newVoteValue, id]
+  set voteValue=$1`, [newVoteValue]
     )
   }
 

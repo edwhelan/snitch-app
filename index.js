@@ -79,35 +79,6 @@ app.get('/', (req, res) =>
     })
 )
 
-// app.post('/vote', (req, res) => 
-// Picture.incrementPicture(id)
-// .then(results => {
-
-// })
-// )
-
-
-
-// Picture.getAllPictures()
-// .then(results => {
-//   console.log(`Yo : ${ results.length }`);
-//   helper.showPictures(results)
-//     .then((allPictures) => {
-//       console.log(allPictures)
-//       res.send(
-//         page(`
-//       ${helper.header(req.session.user)}
-//       <div>${allPictures.join('')}</div>
-//       <h3>sup</h3>
-//           `)
-//       )
-//     })
-
-// })
-
-
-
-
 //twilio Picture add post
 function getAddress(source) {
   return (
@@ -128,7 +99,7 @@ app.post('/sms', (req, res) => {
   const twiml = new MessagingResponse();
   getAddress(req.body.MediaUrl0)
     .then(results => {
-      Picture.addPicture(results, req.body.From, 1)
+      Picture.addPicture(results, req.body.From)
         .catch(err => { console.log(err) });
       twiml.message(`Hi! We recieved your Photo! Happy Snitching!`);
       res.writeHead(200, { 'Content-Type': 'text/xml' });

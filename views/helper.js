@@ -77,7 +77,9 @@ function drawPicture(data, value, id) {
       resolve(`
       <div class='image-in-row' key='${id}'>
       <img srcset=${data} />
-      <i class="fas fa-arrow-up">${value}</i>
+      <i class="fas fa-arrow-up"></i>
+      ${value}
+      <i class="fas fa-arrow-down"></i>
       </div>
       `)
     }

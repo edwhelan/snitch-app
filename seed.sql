@@ -11,13 +11,14 @@ insert into users
   ('Jacky', 'jacky@bobmail.com', '4046686877', '$2b$10$MRBEiNjF1MiftaqbqwVJmuMg.JZXKk.RBJbL3N5cdkxn4qH/jb9eq');
 
 insert into pictures
-  (votevalue, image, phonenumber, user_id)
+  (votevalue, image, phonenumber)
     values
-  (0,'https://s3-external-1.amazonaws.com/media.twiliocdn.com/ACab9c691a6378037d225d48522f484e7d/77243fd3e9236eef1cb975b43c733b9b', '14046686836', 1),
-  (0,'https://s3-external-1.amazonaws.com/media.twiliocdn.com/ACab9c691a6378037d225d48522f484e7d/77243fd3e9236eef1cb975b43c733b9b', '14046686836', 2),
-  (0,'https://s3-external-1.amazonaws.com/media.twiliocdn.com/ACab9c691a6378037d225d48522f484e7d/77243fd3e9236eef1cb975b43c733b9b', '14046686836', 3),
-  (0,'https://s3-external-1.amazonaws.com/media.twiliocdn.com/ACab9c691a6378037d225d48522f484e7d/77243fd3e9236eef1cb975b43c733b9b', '14046686836', 4),
-  (0,'https://s3-external-1.amazonaws.com/media.twiliocdn.com/ACab9c691a6378037d225d48522f484e7d/77243fd3e9236eef1cb975b43c733b9b', '14046686836', 5),
-  (0,'https://s3-external-1.amazonaws.com/media.twiliocdn.com/ACab9c691a6378037d225d48522f484e7d/77243fd3e9236eef1cb975b43c733b9b', '14046686836', 6),
-  (0,'https://s3-external-1.amazonaws.com/media.twiliocdn.com/ACab9c691a6378037d225d48522f484e7d/77243fd3e9236eef1cb975b43c733b9b', '14046686836', 7),
-  (0,'https://s3-external-1.amazonaws.com/media.twiliocdn.com/ACab9c691a6378037d225d48522f484e7d/77243fd3e9236eef1cb975b43c733b9b', '14046686836', 8);
+  (0,'https://s3-external-1.amazonaws.com/media.twiliocdn.com/ACab9c691a6378037d225d48522f484e7d/77243fd3e9236eef1cb975b43c733b9b', '14046686836'),
+  (0,'https://s3-external-1.amazonaws.com/media.twiliocdn.com/ACab9c691a6378037d225d48522f484e7d/77243fd3e9236eef1cb975b43c733b9b', '14046686836'),
+  (0,'https://s3-external-1.amazonaws.com/media.twiliocdn.com/ACab9c691a6378037d225d48522f484e7d/77243fd3e9236eef1cb975b43c733b9b', '14046686836'),
+  (0,'https://s3-external-1.amazonaws.com/media.twiliocdn.com/ACab9c691a6378037d225d48522f484e7d/77243fd3e9236eef1cb975b43c733b9b', '14046686836'),
+  (0,'https://s3-external-1.amazonaws.com/media.twiliocdn.com/ACab9c691a6378037d225d48522f484e7d/77243fd3e9236eef1cb975b43c733b9b', '14046686836'),
+  (0,'https://s3-external-1.amazonaws.com/media.twiliocdn.com/ACab9c691a6378037d225d48522f484e7d/77243fd3e9236eef1cb975b43c733b9b', '14046686836'),
+  (0,'https://s3-external-1.amazonaws.com/media.twiliocdn.com/ACab9c691a6378037d225d48522f484e7d/77243fd3e9236eef1cb975b43c733b9b', '14046686836'),
+  (0,'https://s3-external-1.amazonaws.com/media.twiliocdn.com/ACab9c691a6378037d225d48522f484e7d/77243fd3e9236eef1cb975b43c733b9b', '14046686836');
+
