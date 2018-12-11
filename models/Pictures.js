@@ -30,6 +30,7 @@ class Picture {
   `)
   }
 
+  //Increase Vote value by 1 after user votes
   incrementPicture(voteValue) {
     newVoteValue = voteValue + 1;
     return db.result(`
@@ -38,6 +39,14 @@ class Picture {
     )
   }
 
+  //Decrease vote value by 1 after
+  deccrementPicture(voteValue) {
+    newVoteValue = voteValue - 1;
+    return db.result(`
+  update pictures
+  set voteValue=$1`, [newVoteValue]
+    )
+  }
 
 }
 
