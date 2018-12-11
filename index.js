@@ -50,6 +50,7 @@ const helper = require(`./views/helper`);
 
 const User = require(`./models/Users`);
 const Picture = require(`./models/Pictures`);
+const Votes = require(`./models/Votes`);
 
 //protect route to ensure logged in user is accessing
 function protectRoute(req, res, next) {
@@ -107,12 +108,6 @@ app.post('/sms', (req, res) => {
     });
 })
 
-//take req.body.MediaUrl0 and req.body.From and inject them into Pictures table.
-
-
-
-
-
 //LOGIN
 app.get('/login', (req, res) =>
   res.send(
@@ -152,7 +147,7 @@ app.post(`/ login`, (req, res) => {
 app.get(`/ registered`, (req, res) => {
   res.send(page(`
   ${ helper.header(req.session.user)}
-          < p > you have registered</p > `))
+          <p> you have registered</p > `))
 })
 
 // REGISTER ===== POST
@@ -169,6 +164,14 @@ app.post(`/ register`, (req, res) => {
 app.post(`/ logout`, (req, res) => {
   req.session.destroy();
   res.redirect('/');
+})
+
+//VOTE ====== POST
+
+app.post('/vote', protectRoute, (req, res) => {
+  Votes.add(req.body.name1, today, req.session.user.id, 1)
+  res.redirect(`/${req.session.user.id}/home`);
+
 })
 
 

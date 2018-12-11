@@ -40,7 +40,7 @@ class Picture {
   }
 
   //Decrease vote value by 1 after
-  deccrementPicture(voteValue) {
+  decrementPicture(voteValue) {
     newVoteValue = voteValue - 1;
     return db.result(`
   update pictures
