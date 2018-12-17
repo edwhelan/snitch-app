@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 
+import UpvotedImages from './UpvotedImages'
+
 class ImageColumns extends Component {
   constructor(props) {
     super(props);
     this.state = {
       list: [],
+      upvoteList: []
     }
   }
   //load image data from backend and display in column format
@@ -13,7 +16,6 @@ class ImageColumns extends Component {
     const getAllData = () => {
       fetch(`/api/getList`)
         .then(r => {
-          console.log(r)
           return (r.json())
         }).then(data => {
           data.filter(item => {
@@ -43,17 +45,18 @@ class ImageColumns extends Component {
           })
         })
     }
+
     this.interval = setInterval(() => getAllData(), 5000);
   }
 
   render() {
     return (
-      <>
-        {/* <UpvotedImages data={this.state.list}/> */}
+      <div className='image-container'>
         <div className='upvoted-image-column'>{this.state.list.map((item, index) => {
           return <img className='upvoted-image' key={index} src={item.image} />
         })}</div>
-      </>
+        <UpvotedImages data={this.state.list} />
+      </div>
 
     )
   }

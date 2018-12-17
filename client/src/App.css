@@ -1,3 +1,6 @@
+.image-container {
+  display: flex;
+}
 .upvoted-image-column{
 display: flex;
 flex-direction: column;
