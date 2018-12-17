@@ -81,13 +81,11 @@ app.get('/', (req, res) =>
     })
 )
 
-
+//basic API call to get pictures from the DB
 app.get('/api/getList', (req, res) => {
   Picture.getAllPictures()
     .then(r => res.json(r))
     .then(c => console.log(c))
-
-
 })
 
 //twilio Picture add post
@@ -188,6 +186,6 @@ app.post('/vote', protectRoute, (req, res) => {
 
 
 // LISTEN ON PORT
-app.listen(3000, () => {
+app.listen(5000, () => {
   console.log(`Ready...`);
 });
