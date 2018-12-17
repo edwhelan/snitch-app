@@ -10,6 +10,7 @@ const express = require('express');
 
 const app = express();
 const session = require('express-session');
+const path = require('path');
 const pgSession = require('connect-pg-simple')(session);
 const https = require('follow-redirects').https;
 
@@ -25,7 +26,7 @@ app.use(session({
   }
 }));
 
-app.use(express.static('public')); // all static files will be served from public folder
+app.use(express.static(path.join(__dirname, 'client/build'))); // all static files will be served from public folder
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -79,6 +80,15 @@ app.get('/', (req, res) =>
         })
     })
 )
+
+
+app.get('/api/getList', (req, res) => {
+  Picture.getAllPictures()
+    .then(r => res.json(r))
+    .then(c => console.log(c))
+
+
+})
 
 //twilio Picture add post
 function getAddress(source) {
@@ -169,8 +179,10 @@ app.post(`/ logout`, (req, res) => {
 //VOTE ====== POST
 
 app.post('/vote', protectRoute, (req, res) => {
-  Votes.add(req.body.name1, today, req.session.user.id, 1)
-  res.redirect(`/${req.session.user.id}/home`);
+
+
+  Votes.addVote(req.body.name1, req.body.key, TRUE, FALSE)
+  res.redirect(`/`);
 
 })
 

@@ -1,3 +1,5 @@
+const Votes = require('../models/Votes');
+
 //HEADER AREA 
 function header(isLoggedIn = false) {
   return `
@@ -71,6 +73,7 @@ function logoutButton() {
 }
 
 function drawPicture(data, value, id) {
+
   return new Promise(
     (resolve, reject) => {
       console.log(value)
@@ -81,6 +84,9 @@ function drawPicture(data, value, id) {
       ${value}
       <i class="fas fa-arrow-down"></i>
       </div>
+      <script>
+      
+      </script>
       `)
     }
   )
@@ -93,6 +99,10 @@ function showPictures(images) {
   }))
 }
 
+function upvotePicture(user_id, picture_id) {
+  document.getElementsByClassName("fa-arrow-up").addEventListener("click", Votes.addVote(user_id, TRUE, FALSE, picture_id));
+}
+
 module.exports = {
   header,
   registrationForm,
@@ -100,4 +110,5 @@ module.exports = {
   logoutButton,
   showPictures,
   drawPicture,
+  upvotePicture,
 }
