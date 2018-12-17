@@ -84,8 +84,8 @@ app.get('/', (req, res) =>
 //basic API call to get pictures from the DB
 app.get('/api/getList', (req, res) => {
   Picture.getAllPictures()
-    .then(r => res.json(r))
-    .then(c => console.log(c))
+    .then(r => res.send(r))
+
 })
 
 //twilio Picture add post
