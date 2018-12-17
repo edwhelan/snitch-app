@@ -7,7 +7,10 @@ const UpvotedImages = (props) => {
   return (
     <div className='upvoted-image-column'>
       {newList.map(item => {
-        return <img className='upvoted-image' key={item.id} src={item.image} />
+        return <div>
+          <img className='upvoted-image' key={item.id} src={item.image} />
+          <i class="fas fa-arrow-up"></i> {item.votevalue} <i class="fas fa-arrow-down"></i>
+        </div>
       })}
     </div>
   )

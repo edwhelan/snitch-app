@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 
+
+
 //Import children components
 import UpvotedImages from './UpvotedImages';
 import DownvotedImages from './DownvotedImages';
+import NewImages from './NewImages';
 
 class ImageColumns extends Component {
   constructor(props) {
@@ -54,10 +57,7 @@ class ImageColumns extends Component {
   render() {
     return (
       <div className='image-container'>
-        <div className='upvoted-image-column'>{this.state.list.map((item, index) => {
-          return <img className='upvoted-image' key={index} src={item.image} />
-        })}</div>
-
+        <NewImages data={this.state.list} />
         <UpvotedImages data={this.state.list} />
         <DownvotedImages data={this.state.list} />
       </div>

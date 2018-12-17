@@ -1,13 +1,11 @@
 import React from 'react';
 
-//Load images based off their VoteValue descending
-const DownvotedImages = (props) => {
-  const newList = props.data.sort((a, b) => a.votevalue - b.votevalue)
+const NewImages = (props) => {
+  const newImages = props.data.sort((a, b) => a.id - b.id);
 
   return (
     <div className='upvoted-image-column'>
-      {newList.map(item => {
-
+      {newImages.map(item => {
         return (
           <div>
             <img className='upvoted-image' key={item.id} src={item.image} />
@@ -19,4 +17,4 @@ const DownvotedImages = (props) => {
   )
 }
 
-export default DownvotedImages
+export default NewImages;
