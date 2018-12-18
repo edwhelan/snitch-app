@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Login from './Login';
 import Logout from './Logout';
+import NewUser from './NewUser';
 
 class Registration extends Component {
   constructor(props) {
@@ -37,10 +38,8 @@ class Registration extends Component {
           <li>
             {this.state.loggedIn ? <Logout /> : <Login />}
           </li>
-          <li>Register</li>
+          <li><NewUser /> </li>
         </ul>
-        {/* <Login />
-      <NewUser /> */}
       </div>
     )
   }

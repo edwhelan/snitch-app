@@ -159,7 +159,7 @@ app.get(`/api/loggedin`, (req, res) => {
   if (req.session.user) {
     return res.send(req.session.user)
   } else {
-    console.log('yes')
+    console.log('not logged in')
   }
 })
 
@@ -192,12 +192,12 @@ app.get(`/ registered`, (req, res) => {
 })
 
 // REGISTER ===== POST
-app.post(`/ register`, (req, res) => {
+app.post(`/register`, (req, res) => {
   User.addUser(req.body.displayName, req.body.email, req.body.phoneNumber, req.body.password)
     .then(user => {
       req.session.user = user;
       console.log(req.session.user);
-      res.redirect(`/ registered`)
+      res.redirect(`/`)
     })
 });
 
