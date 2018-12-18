@@ -12,6 +12,7 @@ class ImageColumns extends Component {
     super(props);
     this.state = {
       list: [],
+      loggedIn: false,
     }
   }
   //load image data from backend and display in column format
@@ -49,8 +50,26 @@ class ImageColumns extends Component {
           })
         })
     }
+    const loginCheck = () => {
+      fetch('/api/loggedin')
+        .catch(err => {
+          console.log(err)
+        })
+        .then(r => {
+          return (r.json())
+        })
+        .then(data => {
+          if (data) {
+            this.setState({
+              loggedIn: true
+            })
+          } else {
+            console.log('move along');
+          }
+        })
+    }
 
-    this.interval = setInterval(() => getAllData(), 10000);
+    this.interval = setInterval(() => getAllData(), loginCheck(), 10000);
   }
 
   render() {
@@ -75,17 +94,26 @@ class ImageColumns extends Component {
       body: JSON.stringify({ id }),
     });
   }
+
   // function to pass into components to allow users 
   //to decrease vote value by 1 through a POST req
   _downvoteImage = (id) => {
     console.log(`the child said it was ${id}`)
-    fetch('/api/downvoteimage', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ id }),
-    });
+    //if user is logged in?
+    if (this.state.loggedIn) {
+      fetch('/api/downvoteimage', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id }),
+      });
+    } else {
+      console.log('you cant vote')
+    }
+    //let user vote =>
+    //else button doesnt do anything
+
   }
 
 }
