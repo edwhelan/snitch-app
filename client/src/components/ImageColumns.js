@@ -56,16 +56,30 @@ class ImageColumns extends Component {
   render() {
     return (
       <div className='image-container'>
-        <NewImages handleClick={this._upvoteImage} data={this.state.list} />
-        <UpvotedImages handleClick={this._upvoteImage} data={this.state.list} />
-        <DownvotedImages handleClick={this._upvoteImage} data={this.state.list} />
+        <NewImages handleClick={this._upvoteImage} downClick={this._downvoteImage} data={this.state.list} />
+        <UpvotedImages handleClick={this._upvoteImage} downClick={this._downvoteImage} data={this.state.list} />
+        <DownvotedImages handleClick={this._upvoteImage} downClick={this._downvoteImage} data={this.state.list} />
       </div>
 
     )
   }
+  // function to pass into components to allow users 
+  //to increase vote value by 1 through a POST req
   _upvoteImage = (id) => {
     console.log(`the child said it was ${id}`)
     fetch('/api/upvoteimage', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id }),
+    });
+  }
+  // function to pass into components to allow users 
+  //to decrease vote value by 1 through a POST req
+  _downvoteImage = (id) => {
+    console.log(`the child said it was ${id}`)
+    fetch('/api/downvoteimage', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

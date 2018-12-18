@@ -18,7 +18,14 @@ const DownvotedImages = (props) => {
               }>
               <i class="fas fa-arrow-up"></i>
             </button>
-            {item.votevalue} <i class="fas fa-arrow-down"></i>
+            {item.votevalue}
+            <button
+              onClick={() => {
+                props.downClick(item.id);
+              }
+              }>
+              <i class="fas fa-arrow-down"></i>
+            </button>
           </div>
         )
       })}

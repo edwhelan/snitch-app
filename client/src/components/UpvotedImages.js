@@ -19,7 +19,14 @@ const UpvotedImages = (props) => {
               <i class="fas fa-arrow-up"></i>
             </button>
             {item.votevalue}
-            <i class="fas fa-arrow-down"></i>
+            <button
+              onClick={() => {
+                props.downClick(item.id);
+              }
+              }>
+              <i class="fas fa-arrow-down"></i>
+            </button>
+
           </div>
         )
       })}

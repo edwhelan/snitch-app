@@ -53,12 +53,16 @@ class Picture {
   }
 
   //Decrease vote value by 1 after
-  decrementPicture(voteValue) {
-    newVoteValue = voteValue - 1;
+  static decrementPicture(voteValue, id) {
+    let newVoteValue = voteValue - 1;
     return db.result(`
   update pictures
-  set voteValue=$1`, [newVoteValue]
+  set voteValue=$1
+  where id=$2`, [newVoteValue, id]
     )
+      .then(r => {
+        return r;
+      })
   }
 
 }

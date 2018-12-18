@@ -84,7 +84,6 @@ app.get('/', (req, res) =>
 
 //post request to increase votevalue of ID to DB
 app.post('/api/upvoteimage', (req, res) => {
-  console.log(req.body.id)
   Picture.getPictureById(req.body.id)
     .then(results => {
       Picture.incrementPicture(results.votevalue, results.id)
@@ -95,7 +94,17 @@ app.post('/api/upvoteimage', (req, res) => {
   res.send(
     `i received your POST request this is what you sent me: ${req.body.id}`
   )
+})
 
+//POST request to decrease votevalue of ID to DB
+app.post('/api/downvoteimage', (req, res) => {
+  Picture.getPictureById(req.body.id)
+    .then(r => {
+      Picture.decrementPicture(r.votevalue, r.id)
+    })
+  res.send(
+    `i received your POST request this is what you sent me: ${req.body.id}`
+  )
 })
 
 //GOOD ===============================================
