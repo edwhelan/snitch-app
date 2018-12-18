@@ -81,6 +81,7 @@ app.get('/', (req, res) =>
     })
 )
 
+//GOOD ===============================================
 //basic API call to get pictures from the DB
 app.get('/api/getList', (req, res) => {
   Picture.getAllPictures()

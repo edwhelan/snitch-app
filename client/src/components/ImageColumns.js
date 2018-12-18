@@ -12,7 +12,6 @@ class ImageColumns extends Component {
     super(props);
     this.state = {
       list: [],
-      upvoteList: []
     }
   }
   //load image data from backend and display in column format
@@ -51,19 +50,23 @@ class ImageColumns extends Component {
         })
     }
 
-    this.interval = setInterval(() => getAllData(), 5000);
+    this.interval = setInterval(() => getAllData(), 10000);
   }
 
   render() {
     return (
       <div className='image-container'>
         <NewImages data={this.state.list} />
-        <UpvotedImages data={this.state.list} />
+        <UpvotedImages handleClick={this._upvoteImage} data={this.state.list} />
         <DownvotedImages data={this.state.list} />
       </div>
 
     )
   }
+  _upvoteImage = (id) => {
+    console.log(`the child said it was ${id}`)
+  }
+
 }
 
 export default ImageColumns;

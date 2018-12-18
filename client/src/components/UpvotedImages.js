@@ -7,13 +7,20 @@ const UpvotedImages = (props) => {
   return (
     <div className='upvoted-image-column'>
       {newList.map(item => {
-        return <div>
-          <img className='upvoted-image' key={item.id} src={item.image} />
-          <i class="fas fa-arrow-up"></i> {item.votevalue} <i class="fas fa-arrow-down"></i>
-        </div>
+
+        return (
+          <div>
+            <img className='upvoted-image' key={item.id} src={item.image} />
+            <button onClick={() => {
+              console.log(item.id);
+              props.handleClick(item.id);
+            }
+            }><i class="fas fa-arrow-up"></i></button> {item.votevalue} <i class="fas fa-arrow-down"></i>
+          </div>
+        )
       })}
     </div>
   )
 }
 
-export default UpvotedImages;
+export default UpvotedImages
