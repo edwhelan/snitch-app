@@ -65,6 +65,13 @@ class ImageColumns extends Component {
   }
   _upvoteImage = (id) => {
     console.log(`the child said it was ${id}`)
+    fetch('/api/upvoteimage', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id }),
+    });
   }
 
 }

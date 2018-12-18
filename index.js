@@ -81,6 +81,23 @@ app.get('/', (req, res) =>
     })
 )
 
+
+//post request to increase votevalue of ID to DB
+app.post('/api/upvoteimage', (req, res) => {
+  console.log(req.body.id)
+  Picture.getPictureById(req.body.id)
+    .then(results => {
+      Picture.incrementPicture(results.votevalue, results.id)
+        .then(r => {
+          return console.log(`this is your return : ${r}`);
+        })
+    })
+  res.send(
+    `i received your POST request this is what you sent me: ${req.body.id}`
+  )
+
+})
+
 //GOOD ===============================================
 //basic API call to get pictures from the DB
 app.get('/api/getList', (req, res) => {

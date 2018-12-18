@@ -22,7 +22,17 @@ class Picture {
         return h;
       })
   }
-
+  static getPictureById(id) {
+    return db.one(`
+  select *
+  from pictures
+  where id=$1`, [id])
+      .then(result => {
+        // const v = new Picture(id, result.votevalue, result.image, result.phonenumber);
+        // return v;
+        return result
+      })
+  }
   static getAllPictures() {
     return db.any(`
     select *
@@ -31,12 +41,15 @@ class Picture {
   }
 
   //Increase Vote value by 1 after user votes
-  incrementPicture(voteValue) {
-    newVoteValue = voteValue + 1;
+  static incrementPicture(voteValue, id) {
+    let newVoteValue = voteValue + 1;
     return db.result(`
   update pictures
-  set voteValue=$1`, [newVoteValue]
-    )
+  set voteValue=$1
+  where id=$2`, [newVoteValue, id]
+    ).then(r => {
+      return r;
+    })
   }
 
   //Decrease vote value by 1 after
