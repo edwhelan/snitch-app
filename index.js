@@ -112,8 +112,9 @@ app.post('/api/downvoteimage', (req, res) => {
 app.get('/api/getList', (req, res) => {
   Picture.getAllPictures()
     .then(r => res.send(r))
-
 })
+
+
 
 //twilio Picture add post
 function getAddress(source) {
@@ -153,13 +154,16 @@ app.get('/login', (req, res) =>
             `))
 );
 
-app.get(`/ loggedin`, (req, res) => {
-  res.send(page(`
-  ${ helper.header(req.session.user)}
-          < p > you are logged in</p > `))
+app.get(`/api/loggedin`, (req, res) => {
+  console.log(req.session.user)
+  if (req.session.user) {
+    return res.send(req.session.user)
+  } else {
+    console.log('yes')
+  }
 })
 
-//LOGIN ===== POST
+//LOGIN ===== POST ===+====== TESTED ON REACT
 app.post(`/api/login`, (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -198,7 +202,7 @@ app.post(`/ register`, (req, res) => {
 });
 
 // LOGOUT ======== POST
-app.post(`/ logout`, (req, res) => {
+app.post(`/logout`, (req, res) => {
   req.session.destroy();
   res.redirect('/');
 })
