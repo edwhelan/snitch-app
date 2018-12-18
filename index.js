@@ -160,7 +160,7 @@ app.get(`/ loggedin`, (req, res) => {
 })
 
 //LOGIN ===== POST
-app.post(`/ login`, (req, res) => {
+app.post(`/api/login`, (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   User.getByEmail(email)
@@ -171,10 +171,12 @@ app.post(`/ login`, (req, res) => {
       const didMatch = user.checkPassword(password);
       if (didMatch) {
         req.session.user = user;
-        res.redirect(`/ loggedin`);
+        console.log(`you are now loggedin ${user}`)
+        res.redirect(`/`);
       }
       else {
-        res.redirect(`/ `);
+        console.log(`you did not logged in`)
+        res.redirect(`/didnt/work `);
       }
     })
 });
