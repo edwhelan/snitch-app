@@ -9,7 +9,14 @@ const NewImages = (props) => {
         return (
           <div>
             <img className='upvoted-image' key={item.id} src={item.image} />
-            <i class="fas fa-arrow-up"></i> {item.votevalue} <i class="fas fa-arrow-down"></i>
+            <button
+              onClick={() => {
+                props.handleClick(item.id);
+              }
+              }>
+              <i class="fas fa-arrow-up"></i>
+            </button>
+            {item.votevalue} <i class="fas fa-arrow-down"></i>
           </div>
         )
       })}

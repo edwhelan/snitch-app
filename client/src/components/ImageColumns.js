@@ -56,9 +56,9 @@ class ImageColumns extends Component {
   render() {
     return (
       <div className='image-container'>
-        <NewImages data={this.state.list} />
+        <NewImages handleClick={this._upvoteImage} data={this.state.list} />
         <UpvotedImages handleClick={this._upvoteImage} data={this.state.list} />
-        <DownvotedImages data={this.state.list} />
+        <DownvotedImages handleClick={this._upvoteImage} data={this.state.list} />
       </div>
 
     )
