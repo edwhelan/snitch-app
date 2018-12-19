@@ -50,7 +50,7 @@ class Registration extends Component {
     return (
       <div className='navbar'>
         <ul className='nav-ul'>
-          <li>Naughty Or Nice</li>
+          <li>Naughty Or Nice 678-673-3936</li>
           {/* {this.state.loggedIn ? <li className='nav-logout'><Logout /></li> : <><li className='nav-login'><Login /></li> <li className='nav-register'><NewUser /></li></>} */}
           {this.state.loggedIn ? <li className='nav-logout'><Logout /></li> : <><li><button onClick={this._isClickedLogin}>Login</button></li><li>{this.state.loginOpen ? <Login /> : <></>}</li><li><button onClick={this._isClickedRegister}>Register</button></li><li>{this.state.registerOpen ? <NewUser /> : <></>}</li></>}
           <li><i class="fas fa-sleigh"></i></li>

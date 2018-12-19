@@ -126,7 +126,7 @@ app.post('/sms', (req, res) => {
     .then(results => {
       Picture.addPicture(results, req.body.From)
         .catch(err => { console.log(err) });
-      twiml.message(`Hi! We recieved your Photo! Happy Snitching!`);
+      twiml.message(`Hi! We recieved your Photo! Thanks for calling Santa!!`);
       res.writeHead(200, { 'Content-Type': 'text/xml' });
       res.end(twiml.toString());
     });
