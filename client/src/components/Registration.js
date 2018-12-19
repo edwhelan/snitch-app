@@ -9,6 +9,8 @@ class Registration extends Component {
     this.state = {
       loggedIn: false,
       displayname: '',
+      loginOpen: false,
+      registerOpen: false,
     }
   }
   async componentDidMount() {
@@ -31,11 +33,27 @@ class Registration extends Component {
       })
   }
 
+  _isClickedLogin = () => {
+    console.log("clicked it")
+    this.setState({
+      loginOpen: !this.state.loginOpen
+    })
+  }
+  _isClickedRegister = () => {
+    console.log("clicked it")
+    this.setState({
+      registerOpen: !this.state.registerOpen
+    })
+  }
+
   render() {
     return (
-      <div>
-        <ul>
-          {this.state.loggedIn ? <li><Logout /></li> : <><li><Login /></li> <li><NewUser /></li></>}
+      <div className='navbar'>
+        <ul className='nav-ul'>
+          <li>Naughty Or Nice</li>
+          {/* {this.state.loggedIn ? <li className='nav-logout'><Logout /></li> : <><li className='nav-login'><Login /></li> <li className='nav-register'><NewUser /></li></>} */}
+          {this.state.loggedIn ? <li className='nav-logout'><Logout /></li> : <><li><button onClick={this._isClickedLogin}>Login</button></li><li>{this.state.loginOpen ? <Login /> : <></>}</li><li><button onClick={this._isClickedRegister}>Register</button></li><li>{this.state.registerOpen ? <NewUser /> : <></>}</li></>}
+          <li><i class="fas fa-sleigh"></i></li>
         </ul>
       </div>
     )

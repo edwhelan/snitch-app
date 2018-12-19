@@ -3,7 +3,7 @@ import React from 'react'
 
 const Login = (props) => {
   return (
-    <form action='/api/login' method='POST'>
+    <form className='nav-login' action='/api/login' method='POST' >
       <label>
         Email address:
       <input type='email' name='email' required />
@@ -12,7 +12,7 @@ const Login = (props) => {
         Password:
           <input type="password" name="password" required />
       </label> <br />
-      <input type="submit" value="Login" />
+      <input type="submit" value="submit" />
     </form>
   )
 }

@@ -1,11 +1,51 @@
+html, body {
+  height: 98%;
+  overflow: hidden;
+  margin: 0;
+}
+body{
+  background-color: red;
+  color: white;
+}
+
+.navbar{
+  height: 10%;
+}
+.nav-ul{
+  display: flex;
+  list-style-type: none;
+  justify-content: space-evenly;
+}
+
+.nav-login{
+  z-index: 7;
+}
+
 .image-container {
   display: flex;
+  position: absolute;
+  justify-content: space-evenly;
+  height: 100%;
 }
 .upvoted-image-column{
+  float:left;
 display: flex;
 flex-direction: column;
-width: 220px;
+width: 30%;
+max-height: 100%;
+overflow: scroll;
 }
 .upvoted-image{
-width: 200px;
+width: 100%;
 }
+.button-row{
+  display: flex;
+  justify-content: space-evenly;
+padding-bottom: 1em;
+
+}
+
+.fancy-border {
+  border: 2px solid white;
+}
+
