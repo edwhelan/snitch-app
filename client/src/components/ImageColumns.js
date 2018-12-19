@@ -13,6 +13,7 @@ class ImageColumns extends Component {
     this.state = {
       list: [],
       loggedIn: false,
+      user_id: 0,
     }
   }
   //load image data from backend and display in column format
@@ -61,7 +62,8 @@ class ImageColumns extends Component {
         .then(data => {
           if (data) {
             this.setState({
-              loggedIn: true
+              loggedIn: true,
+              user_id: data.id
             })
           } else {
             console.log('move along');
@@ -82,40 +84,98 @@ class ImageColumns extends Component {
 
     )
   }
-  // function to pass into components to allow users 
-  //to increase vote value by 1 through a POST req
-  _upvoteImage = (id) => {
-    console.log(`the child said it was ${id}`)
-    fetch('/api/upvoteimage', {
+
+  // check to see if vote exists already
+  _doesVoteExist = (user_id, id) => {
+    return fetch('/api/voteExist', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ id }),
-    });
+      body: JSON.stringify({ user_id, id }),
+    }).then(r => {
+      return (r.json())
+    })
   }
+
+  // function to pass into components to allow users 
+  //to increase vote value by 1 through a POST req
+  _upvoteImage = (id) => {
+    console.log(`the child said it was ${id}`)
+    let loggedInUser = this.state.user_id
+    //if user is logged in?
+    if (this.state.loggedIn) {
+      //check to see if the user has voted already
+      this._doesVoteExist(this.state.user_id, id)
+        .then(didVote => {
+          if (didVote === 1) {
+            //vote does exist do nothing
+            console.log(`if statement:${didVote}`)
+          } else {
+            //vote doesnt exist
+            //let user vote =>
+            fetch('/api/upvoteimage', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ id, loggedInUser }),
+            });
+          }
+        })
+    } else {
+      console.log('You are not logged in')
+    }
+    // console.log(`the child said it was ${id}`)
+    // if (this.state.loggedIn) {
+    //   fetch('/api/upvoteimage', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({ id }),
+    //   });
+    // } else {
+    //   console.log('you cannot upvote')
+    // }
+  }
+
 
   // function to pass into components to allow users 
   //to decrease vote value by 1 through a POST req
   _downvoteImage = (id) => {
     console.log(`the child said it was ${id}`)
+    let loggedInUser = this.state.user_id
     //if user is logged in?
     if (this.state.loggedIn) {
-      fetch('/api/downvoteimage', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ id }),
-      });
+      //check to see if the user has voted already
+      this._doesVoteExist(this.state.user_id, id)
+        .then(didVote => {
+          if (didVote === 1) {
+            //vote does exist do nothing
+            console.log(`if statement:${didVote}`)
+          } else {
+            //vote doesnt exist
+            //let user vote =>
+            fetch('/api/downvoteimage', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ id, loggedInUser }),
+            });
+          }
+        })
     } else {
-      console.log('you cant vote')
+      console.log('You are not logged in')
     }
-    //let user vote =>
-    //else button doesnt do anything
-
   }
 
 }
+
+
+
+
+
 
 export default ImageColumns;

@@ -8,19 +8,32 @@ class Votes {
       this.upvoted = upvoted,
       this.downvoted = downvoted
   }
-  static addVote(user_id, upvoted, downvoted, picture_id) {
+  static addVote(user_id, picture_id, upvoted, downvoted) {
     return db.one(`
   insert into Votes
-  (user_id, picture.id, upvoted, downvoted)
+  (user_id, picture_id, upvoted, downvoted)
   values
-  ($1, $2, $3)
-  returning id`, [user_id, upvoted, downvoted]
+  ($1, $2, $3, $4)
+  returning id`, [user_id, picture_id, upvoted, downvoted]
     ).then(result => {
-      const h = new Votes(result.id, picture_id, upvoted, downvoted)
+      const h = new Votes(result.id, user_id, picture_id, upvoted, downvoted)
       return h;
     })
   }
 
+  //query to check if a user has voted on a specific image already
+  static checkVoteExistence(user_id, picture_id) {
+    return db.any(`
+  select *
+  from votes
+  where user_id=$1 
+  and 
+  picture_id=$2
+  `, [user_id, picture_id]
+    ).then(r => {
+      return r.length
+    })
+  }
 
 }
 

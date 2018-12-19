@@ -88,7 +88,7 @@ app.post('/api/upvoteimage', (req, res) => {
     .then(results => {
       Picture.incrementPicture(results.votevalue, results.id)
         .then(r => {
-          return console.log(`this is your return : ${r}`);
+          Votes.addVote(req.body.loggedInUser, req.body.id, true, false)
         })
     })
   res.send(
@@ -96,11 +96,15 @@ app.post('/api/upvoteimage', (req, res) => {
   )
 })
 
-//POST request to decrease votevalue of ID to DB
+
+//POST request to decrease votevalue of ID to DB on PICTURE DB  and
+//then write to VOTES DB that user has voted
 app.post('/api/downvoteimage', (req, res) => {
   Picture.getPictureById(req.body.id)
     .then(r => {
       Picture.decrementPicture(r.votevalue, r.id)
+    }).then(data => {
+      Votes.addVote(req.body.loggedInUser, req.body.id, false, true)
     })
   res.send(
     `i received your POST request this is what you sent me: ${req.body.id}`
@@ -113,8 +117,6 @@ app.get('/api/getList', (req, res) => {
   Picture.getAllPictures()
     .then(r => res.send(r))
 })
-
-
 
 //twilio Picture add post
 function getAddress(source) {
@@ -208,13 +210,14 @@ app.post(`/logout`, (req, res) => {
 })
 
 //VOTE ====== POST
-
-app.post('/vote', protectRoute, (req, res) => {
-
-
-  Votes.addVote(req.body.name1, req.body.key, TRUE, FALSE)
-  res.redirect(`/`);
-
+app.post('/api/voteExist', protectRoute, (req, res) => {
+  Votes.checkVoteExistence(req.body.user_id, req.body.id)
+    .then(r => {
+      res.send(
+        `${r}`
+      )
+    })
+  // Votes.addVote(req.body.name1, req.body.key, TRUE, FALSE)
 })
 
 
