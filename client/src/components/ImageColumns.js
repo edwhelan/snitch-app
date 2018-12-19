@@ -126,18 +126,7 @@ class ImageColumns extends Component {
     } else {
       console.log('You are not logged in')
     }
-    // console.log(`the child said it was ${id}`)
-    // if (this.state.loggedIn) {
-    //   fetch('/api/upvoteimage', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({ id }),
-    //   });
-    // } else {
-    //   console.log('you cannot upvote')
-    // }
+
   }
 
 
@@ -172,10 +161,5 @@ class ImageColumns extends Component {
   }
 
 }
-
-
-
-
-
 
 export default ImageColumns;

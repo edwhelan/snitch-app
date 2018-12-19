@@ -35,10 +35,7 @@ class Registration extends Component {
     return (
       <div>
         <ul>
-          <li>
-            {this.state.loggedIn ? <Logout /> : <Login />}
-          </li>
-          <li><NewUser /> </li>
+          {this.state.loggedIn ? <li><Logout /></li> : <><li><Login /></li> <li><NewUser /></li></>}
         </ul>
       </div>
     )

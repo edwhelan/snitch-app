@@ -10,7 +10,6 @@ class App extends Component {
     return (
       <div className="App">
         <Registration />
-        <h1>Naughty or Nice</h1>
         <ImageColumns />
       </div>
     );

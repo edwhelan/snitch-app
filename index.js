@@ -64,23 +64,7 @@ function protectRoute(req, res, next) {
   }
 }
 
-//=======ROUTES===============
-//ROOT
-app.get('/', (req, res) =>
-  Picture.getAllPictures()
-    .then(results => {
-      helper.showPictures(results)
-        .then(allPictures => {
-          res.send(
-            page(`
-            ${helper.header(req.session.user)}
-            <div class='image-gallery'>${allPictures.join('')}</div>
-            `)
-          )
-        })
-    })
-)
-
+//=======API ROUTES===============
 
 //post request to increase votevalue of ID to DB
 app.post('/api/upvoteimage', (req, res) => {
@@ -111,14 +95,15 @@ app.post('/api/downvoteimage', (req, res) => {
   )
 })
 
-//GOOD ===============================================
 //basic API call to get pictures from the DB
 app.get('/api/getList', (req, res) => {
   Picture.getAllPictures()
     .then(r => res.send(r))
 })
 
-//twilio Picture add post
+
+//route handling and redirection to allow for 
+//correct URL to be written into PICTURE DB
 function getAddress(source) {
   return (
     new Promise(
@@ -133,6 +118,7 @@ function getAddress(source) {
   )
 }
 
+//TWILIO Picture add post
 app.post('/sms', (req, res) => {
   // console.log(req.body.MediaUrl0)
   const twiml = new MessagingResponse();
@@ -146,16 +132,7 @@ app.post('/sms', (req, res) => {
     });
 })
 
-//LOGIN
-app.get('/login', (req, res) =>
-  res.send(
-    page(`
-  ${ helper.header(req.session.user)}
-  ${ helper.registrationForm()}
-  ${ helper.loginForm()}
-            `))
-);
-
+//DETECT IF USER IS LOGGED IN ===================
 app.get(`/api/loggedin`, (req, res) => {
   console.log(req.session.user)
   if (req.session.user) {
@@ -165,7 +142,7 @@ app.get(`/api/loggedin`, (req, res) => {
   }
 })
 
-//LOGIN ===== POST ===+====== TESTED ON REACT
+//LOGIN =========================================
 app.post(`/api/login`, (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -187,13 +164,7 @@ app.post(`/api/login`, (req, res) => {
     })
 });
 
-app.get(`/ registered`, (req, res) => {
-  res.send(page(`
-  ${ helper.header(req.session.user)}
-          <p> you have registered</p > `))
-})
-
-// REGISTER ===== POST
+// REGISTER ==================================
 app.post(`/register`, (req, res) => {
   User.addUser(req.body.displayName, req.body.email, req.body.phoneNumber, req.body.password)
     .then(user => {
@@ -203,13 +174,13 @@ app.post(`/register`, (req, res) => {
     })
 });
 
-// LOGOUT ======== POST
+// LOGOUT ===============================
 app.post(`/logout`, (req, res) => {
   req.session.destroy();
   res.redirect('/');
 })
 
-//VOTE ====== POST
+//VOTE ====================================
 app.post('/api/voteExist', protectRoute, (req, res) => {
   Votes.checkVoteExistence(req.body.user_id, req.body.id)
     .then(r => {
@@ -217,7 +188,6 @@ app.post('/api/voteExist', protectRoute, (req, res) => {
         `${r}`
       )
     })
-  // Votes.addVote(req.body.name1, req.body.key, TRUE, FALSE)
 })
 
 
