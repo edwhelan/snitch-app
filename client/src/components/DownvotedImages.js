@@ -6,6 +6,7 @@ const DownvotedImages = (props) => {
 
   return (
     <div className='upvoted-image-column'>
+      <span className='column-text'>Naughty!</span>
       {newList.map(item => {
 
         return (

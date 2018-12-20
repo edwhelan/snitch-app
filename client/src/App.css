@@ -4,13 +4,50 @@ html, body {
   margin: 0;
 }
 body{
+  background-color: #cb2d3e;
+    color: #b1b1b1;
+    background: radial-gradient(ellipse at center, #111 10%, #ef473a 100%);
+    background-attachment: fixed;
   background-color: red;
   color: white;
 }
+/* import cursive 'santa' font */
+@import url('https://fonts.googleapis.com/css?family=Charm');
+
 
 .navbar{
+  font-family: 'Charm', cursive;
+  font-size: 1.5em;
   height: 10%;
+  border-bottom: 3px solid green;
 }
+
+.navbar button, .logoutButton {
+	-moz-box-shadow:inset 0px 39px 0px -24px #3dd28d;
+	-webkit-box-shadow:inset 0px 39px 0px -24px #3dd28d;
+	box-shadow:inset 0px 39px 0px -24px #3dd28d;
+	background-color:#3dd28d;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+	border:1px solid #ffffff;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	padding:6px 15px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #3dd28a;
+}
+.myButton:hover {
+	background-color:#eb675e;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
 .nav-ul{
   display: flex;
   list-style-type: none;
@@ -49,3 +86,8 @@ padding-bottom: 1em;
   border: 2px solid white;
 }
 
+.column-text{
+  font-size: 1.5em;
+  font-family: 'Charm', cursive;
+  text-align: center;
+}

@@ -19,7 +19,7 @@ class Registration extends Component {
         console.log(err)
       })
       .then(r => {
-        return (r.json())
+        return (r.json());
       })
       .then(data => {
         if (data) {
