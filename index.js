@@ -26,7 +26,7 @@ app.use(session({
   }
 }));
 
-app.use(express.static(path.join(__dirname, 'client/build'))); // all static files will be served from public folder
+app.use(express.static(path.join(__dirname, 'public'))); // all static files will be served from public folder
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
