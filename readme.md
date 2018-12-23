@@ -1,8 +1,6 @@
 #Naughty or Nice???
 ### BETTER CALL SANTA
 
-@edwhelan :rocket:
-
 An app to allow users to send an SMS message to Santa Claus :santa: and allow users to attempt to influence by way of voting on if they think something is 'Naughty or Nice'.
 
 Built with: React, PostgreSQL, Node.js, Express, bCrypt, Twillio.
